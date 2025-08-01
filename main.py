@@ -12,12 +12,25 @@ def main():
     clock = pygame.time.Clock()
     dt = 0;
 
+    # Create groups
+    updateable_group = pygame.sprite.Group()
+    drawable_group = pygame.sprite.Group()
+
+    # create player
+    Player.containers = (updateable_group, drawable_group)
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, PLAYER_RADIUS)
 
     while True:
         screen.fill("black")
-        player.update(dt)
-        player.draw(screen)
+
+        # update all objects
+        for object in updateable_group:
+            object.update(dt)
+        
+        # draw all objects
+        for object in drawable_group:
+            object.draw(screen)
+
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
