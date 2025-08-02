@@ -39,6 +39,11 @@ def main():
         for object in drawable_group:
             object.draw(screen)
 
+        for asteroid in asteroid_group:
+            if asteroid.collision(player):
+                print("Game over!")
+                return
+
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
